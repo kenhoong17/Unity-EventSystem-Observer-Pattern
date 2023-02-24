@@ -10,13 +10,13 @@ namespace XTT
     public static class EventManager
     {
         // =================================================================================================================
-       
+
         #region Event Variables
 
-        private static Dictionary<Type, EventAction<Event>> _LISTENER_DICT  = new Dictionary<Type, EventAction<Event>>();
-        private static Dictionary<Delegate, EventAction<Event>>    _LOOKUP_DICT    = new Dictionary<Delegate, EventAction<Event>>();
+        private static Dictionary<Type, EventAction<Event>> _LISTENER_DICT = new Dictionary<Type, EventAction<Event>>();
+        private static Dictionary<Delegate, EventAction<Event>> _LOOKUP_DICT = new Dictionary<Delegate, EventAction<Event>>();
 
-        private static Dictionary<Type, EventAction<Event>> _DONT_DESTROY_LISTENER_DICT  = new Dictionary<Type, EventAction<Event>>();
+        private static Dictionary<Type, EventAction<Event>> _DONT_DESTROY_LISTENER_DICT = new Dictionary<Type, EventAction<Event>>();
         private static Dictionary<Delegate, EventAction<Event>> _DONT_DESTROY_LOOKUP_DICT = new Dictionary<Delegate, EventAction<Event>>();
 
         #endregion Event Variables
@@ -25,7 +25,7 @@ namespace XTT
 
         #region Event Functions
 
-        public static void AddEvent( Event evt )
+        public static void AddEvent(Event evt)
         {
             if (_LISTENER_DICT.TryGetValue(evt.GetType(), out EventAction<Event> listener))
             {
@@ -39,7 +39,7 @@ namespace XTT
 
         }
 
-        public static void AddListener<T>(EventAction<T> listener ) where T : Event
+        public static void AddListener<T>(EventAction<T> listener) where T : Event
         {
             // To avoid multiple registration of same listener
             if (_LOOKUP_DICT.ContainsKey(listener))
@@ -60,7 +60,7 @@ namespace XTT
             }
         }
 
-        public static void RemoveListener<T>(EventAction<T> listener ) where T : Event
+        public static void RemoveListener<T>(EventAction<T> listener) where T : Event
         {
             if (_LOOKUP_DICT.TryGetValue(listener, out EventAction<Event> actualListener))
             {
@@ -82,11 +82,11 @@ namespace XTT
             }
         }
 
-        public static void AddDontDestroyListener<T>(EventAction<T> listener ) where T : Event
+        public static void AddDontDestroyListener<T>(EventAction<T> listener) where T : Event
         {
             // To avoid multiple registration of same listener
             if (_DONT_DESTROY_LOOKUP_DICT.ContainsKey(listener))
-            { 
+            {
                 return;
             }
 
@@ -105,7 +105,7 @@ namespace XTT
             }
         }
 
-        public static void RemoveDontDestroyListener<T>(EventAction<T> listener ) where T : Event
+        public static void RemoveDontDestroyListener<T>(EventAction<T> listener) where T : Event
         {
             if (_DONT_DESTROY_LOOKUP_DICT.TryGetValue(listener, out EventAction<Event> actualListener))
             {
